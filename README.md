@@ -1,60 +1,98 @@
-# Rediditorials
+# Redditorials
 
-🎉 **Welcome to Rediditorials!** 🎉
-
-Rediditorials is an open-source Reddit bot designed to fetch and summarize interesting stories from various subreddits based on user-defined keywords. The bot categorizes the stories into trending, popular, and underrated, providing a seamless way to explore Reddit content.
+Redditorials is a project designed to fetch trending, popular, and underrated stories from Reddit based on user-selected subreddits and preferences. It utilizes FastAPI for building backend APIs and can be extended with AI-based features like summarization and text-to-speech in the future.
 
 ## Features
-
-**Keyword Search:** Enter a keyword to fetch relevant subreddits.  
-**Story Categories:** Retrieve stories categorized as trending, popular, and underrated.  
-**User-Friendly Interface:** Enjoy a simple and engaging command-line interface.  
-**Open Source:** Contributions are welcome! Feel free to fork the repository and submit your improvements.  
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.6 or higher  
-- Reddit account for API access  
-
-### Installation
-
-1. Clone the repository:  
-```bash
-git clone https://github.com/Prateesh-Sulikeri/redditorials.git
-cd redditorials
+- Fetches stories from Reddit based on subreddit keyword search.
+- Categorizes stories into trending, popular, and underrated.
+- Backend APIs built using FastAPI for scalable integration.
+- Modular architecture to easily add features like AI-based story summarization and text-to-speech.
+- Future roadmap includes video generation based on stories for social media platforms.
+  
+## Project Structure
+```py
+Redditorials/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── reddit_search.py
+│   ├── stories/
+│   │   ├── __init__.py
+│   │   └── fetcher.py
+│   ├── config.py
+├── tests/
+│   ├── __init__.py
+│   └── test_main.py
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
-2. Install required packages:
+
+## Setup
+To set up the project on your local machine, follow these steps:
+
+- Clone the repository:
+```bash
+git clone https://github.com/your-github-username/repository-name.git
+```
+- Navigate to the project directory:
+```bash
+cd Redditorials
+```
+- Configure Reddit API Access:
+
+To use the Reddit API, you will need to create a Reddit account if you don't have one.
+Go to Reddit's Developer Portal and create a new app.
+After creating the app, you'll get the following credentials:
+```py
+client_id
+client_secret
+user_agent
+username
+password
+```
+- Edit config.py:
+
+Open the config.py file located inside the app/ directory.
+Replace the placeholders with your actual Reddit API credentials:
+``` py
+REDDIT_CLIENT_ID = "your_client_id"
+REDDIT_CLIENT_SECRET = "your_client_secret"
+REDDIT_USER_AGENT = "your_user_agent"
+REDDIT_USERNAME = "your_reddit_username"
+REDDIT_PASSWORD = "your_reddit_password"
+```
+- Create a virtual environment (optional but recommended):
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+- Install Dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-3. Create a config.py file in the project root directory with your Reddit API credentials:
+- Run the application:
 ```bash
-# Reddit API credentials
-REDDIT_CLIENT_ID = 'your_client_id'
-REDDIT_CLIENT_SECRET = 'your_client_secret'
-REDDIT_USER_AGENT = 'RediditorialsBot/0.1'
-REDDIT_USERNAME = 'your_username'
-REDDIT_PASSWORD = 'your_password'
+uvicorn app:app --reload
 ```
-4. Run the bot:
-```bash
-python bot.py
-```
-5. Example Usage:
-```bash
-Enter a keyword to search for relevant subreddits: horror
-Fetching stories from r/horror...
+The API should now be running on http://127.0.0.1:8000.
 
-🎉 Trending Stories 🎉
-📖 Title: Oddity is out on Shudder, go check it out!
-   ⭐ Score: 449
-   🔗 URL: https://www.reddit.com/r/horror/comments/1frp335/oddity_is_out_on_shudder
-```
+## API Endpoints
+- /subreddits
+   * Method: GET
+   * Description: Fetches stories from subreddits based on the given keyword.
+   * Parameters:
+      keyword (query parameter) – The keyword to search subreddits.
+   * Response:
+   * Returns the subreddit name and stories if found.
+   * Returns 404 error if no relevant subreddit or stories are found.
+   * Example:
+   ```bash
+   curl "http://127.0.0.1:8000/subreddits?keyword=horror"
+   ```
+## Future Features (Roadmap)
+- AI Summarization: Summarize each fetched Reddit story.
+- Text-to-Speech: Convert the text of the story into speech.
+- Video Generation: Automate video creation for platforms like YouTube and TikTok based on selected stories.
+- Community-Driven Features: Make the project community-driven for collaboration and improvement.
 
-### Contributing
-We welcome contributions! If you'd like to improve Rediditorials, please fork the repository and submit a pull request.
-
-### License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
