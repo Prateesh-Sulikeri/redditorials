@@ -33,7 +33,7 @@ To set up the project on your local machine, follow these steps:
 
 - Clone the repository:
 ```bash
-git clone https://github.com/your-github-username/repository-name.git
+git clone https://github.com/Prateesh-Sulikeri/redditorials.git
 ```
 - Navigate to the project directory:
 ```bash
